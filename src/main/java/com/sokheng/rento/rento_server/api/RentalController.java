@@ -28,8 +28,8 @@ public class RentalController {
     }
 
     @PostMapping("/create")
-    public ApiResponse postCreateRental(@RequestParam String authToken, @RequestParam String name, @RequestParam float price, @RequestParam String location, @RequestParam String publishDate,
-    @RequestParam String expireDate, @RequestParam String description, @RequestParam String status, @RequestParam String propertyType, @RequestParam String imageUrl) {
+    public ApiResponse postCreateRental(@RequestParam("authToken") String authToken, @RequestParam("name") String name, @RequestParam("price") float price, @RequestParam("location") String location, @RequestParam("publishDate") String publishDate,
+    @RequestParam("expireDate") String expireDate, @RequestParam("description") String description, @RequestParam("status") String status, @RequestParam("propertyType") String propertyType, @RequestParam("imageUrl") String imageUrl) {
         // Check if authToken is null or empty
         if (authToken == null || authToken.trim().isEmpty()) {
             return new ApiResponse("Authentication token is required", "fail");
@@ -54,7 +54,7 @@ public class RentalController {
     }
 
     @PostMapping("/delete")
-    public ApiResponse postDeleteRental(@RequestParam String authToken, @RequestParam String rentalId) {
+    public ApiResponse postDeleteRental(@RequestParam("authToken") String authToken, @RequestParam("rentalId") String rentalId) {
         // Check if authToken is null or empty
         if (authToken == null || authToken.trim().isEmpty()) {
             return new ApiResponse("Authentication token is required", "fail");
@@ -78,7 +78,7 @@ public class RentalController {
     }
 
     @PostMapping("/purchase")
-    public ApiResponse postPurchaseRental(@RequestParam String rentalId, @RequestParam String authToken) {
+    public ApiResponse postPurchaseRental(@RequestParam("rentalId") String rentalId, @RequestParam("authToken") String authToken) {
         // Check if authToken is null or empty
         if (authToken == null || authToken.trim().isEmpty()) {
             return new ApiResponse("Authentication token is required", "fail");

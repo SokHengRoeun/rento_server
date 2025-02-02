@@ -24,7 +24,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public Object login(@RequestParam String email, @RequestParam String password) {
+    public Object login(@RequestParam("email") String email, @RequestParam("password") String password) {
         UserEntity userEntity = userService.findByEmailAndPassword(email, password);
 
         if (userEntity == null) {
@@ -40,8 +40,8 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public ApiResponse Register(@RequestParam String name, @RequestParam String email, @RequestParam String password, @RequestParam String address,
-     @RequestParam String phoneNumber, @RequestParam String gender, @RequestParam String role) {
+    public ApiResponse Register(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("password") String password, @RequestParam("address") String address,
+     @RequestParam("phoneNumber") String phoneNumber, @RequestParam("gender") String gender, @RequestParam("role") String role) {
         // Check if email is already registered
         if (userService.isEmailAlreadyRegistered(email)) {
             return new ApiResponse("This email is already used", "fail");
@@ -54,14 +54,14 @@ public class LoginController {
     }
 
     @PostMapping("/logout")
-    public ApiResponse Logout(@RequestParam String token) {
+    public ApiResponse Logout(@RequestParam("token") String token) {
         UserEntity userEntity = userService.findUserByAuthToken(token);
         userEntity.setAuthToken("");
         return new ApiResponse("Logout successful", "success");
     }
 
     @PostMapping("/profile")
-    public ApiResponse postProfile(@RequestParam String token, @RequestParam String profile) {
+    public ApiResponse postProfile(@RequestParam("token") String token, @RequestParam("profile") String profile) {
         UserEntity userEntity = userService.findUserByAuthToken(token);
         userEntity.setProfileImage(profile);
         return new ApiResponse("Profile successfully changed", "success");
